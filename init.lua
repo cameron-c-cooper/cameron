@@ -1,6 +1,8 @@
 vim.g.mapleader = ' '
 
+vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = "number"
 
 vim.opt.shiftwidth = 2
 
@@ -9,6 +11,8 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.cursorline = true
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
