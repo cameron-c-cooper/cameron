@@ -15,5 +15,6 @@ return {
   init = function()
     require('toggleterm').setup()
     map('n', '<leader>tv', '<CMD>ToggleTerm size=77 dir=~/ direction=vertical name=~<CR>')
+    map('n', '<leader>t ', '<CMD>ToggleTerm dir=~/ direction=float name=~<CR>')
   end
 }
