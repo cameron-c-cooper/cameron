@@ -13,7 +13,7 @@ local palettes = {
   },
   nightfox = {
     -- A specific style's value will be used over the `all`'s value
-    red = "#c94f6d",
+    red = { base = "#c94f6d", bright = "#f01010", },
   },
   dayfox = {
     -- Defining multiple shades is done by passing a table
