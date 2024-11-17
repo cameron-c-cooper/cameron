@@ -101,7 +101,10 @@ return {
   --   require("nightfox").setup({ palettes = palettes, specs = specs, groups = groups })
   --   vim.cmd("colorscheme carbonfox")
   -- end
-  "scottmckendry/cyberdream.nvim",
+--   "scottmckendry/cyberdream.nvim",
+--   lazy = false,
+--   priority = 1000,
+  "Cameron-Cooper22/cyber2077.nvim",
   lazy = false,
   priority = 1000,
 }
