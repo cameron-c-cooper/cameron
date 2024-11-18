@@ -5,7 +5,7 @@
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
-  "cyber2077.nvim": { "branch": "main", "commit": "4ba0304202739886fe2a168ee9125c8d5c6aebf3" },
+  "cyber2077.nvim": { "branch": "main", "commit": "44cf33134a6f48f4c89bf8224b7fc34298f6196e" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "1b7921eecc65af1baf8ac1dc06f0794934cbcfb2" },
   "feline.nvim": { "branch": "main", "commit": "c97c17dc56ca3cf2b9b9192c3447fc59347e8c0d" },

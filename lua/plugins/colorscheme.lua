@@ -107,4 +107,7 @@ return {
   "Cameron-Cooper22/cyber2077.nvim",
   lazy = false,
   priority = 1000,
+  config = function()
+    vim.cmd [[colorscheme cyber2077]]
+  end
 }
