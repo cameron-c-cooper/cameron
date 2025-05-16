@@ -104,10 +104,16 @@ return {
 --   "scottmckendry/cyberdream.nvim",
 --   lazy = false,
 --   priority = 1000,
-  "Cameron-Cooper22/cyber2077.nvim",
+  -- "Cameron-Cooper22/cyber2077.nvim",
+  -- lazy = false,
+  -- priority = 1000,
+  -- config = function()
+  --   vim.cmd [[colorscheme cyber2077]]
+  -- end
+  "scottmckendry/cyberdream.nvim",
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd [[colorscheme cyber2077]]
+    vim.cmd("colorscheme cyberdream")
   end
 }

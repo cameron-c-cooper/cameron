@@ -68,12 +68,11 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      require('mason-lspconfig').setup_handlers {
-	function(server_name)
-	  require("lspconfig")[server_name].setup {}
-	end,
-
-      }
+ --      require('mason-lspconfig').setup_handlers({
+	-- function(server_name)
+	--   require("lspconfig")[server_name].setup()
+	-- end,
+ --      })
 
       require('mason-lspconfig').setup {
         handlers = {
