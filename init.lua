@@ -26,6 +26,7 @@ vim.filetype.add({
   pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 })
 
+
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   pattern = {"*.hl", "hypr*.conf"},
   callback = function(event)
@@ -35,6 +36,13 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
       cmd = {"hyprls"},
       root_dir = vim.fn.getcwd(),
     }
+  end
+})
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = {"*.h"},
+  callback = function(event)
+    vim.bo.filetype = "c" 
   end
 })
 
