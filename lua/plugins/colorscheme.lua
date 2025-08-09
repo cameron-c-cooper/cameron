@@ -93,17 +93,14 @@ local groups = {
 -- setup must be called before loading
 
 return {
-  -- "EdenEast/nightfox.nvim",
-  -- lazy = false,
-  -- priority = 1000,
-  -- opts = {},
-  -- config = function()
-  --   require("nightfox").setup({ palettes = palettes, specs = specs, groups = groups })
-  --   vim.cmd("colorscheme carbonfox")
-  -- end
---   "scottmckendry/cyberdream.nvim",
---   lazy = false,
---   priority = 1000,
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+	require("nightfox").setup({ palettes = palettes, specs = specs, groups = groups })
+	vim.cmd("colorscheme carbonfox")
+    end
   -- "Cameron-Cooper22/cyber2077.nvim",
   -- lazy = false,
   -- priority = 1000,
@@ -116,11 +113,11 @@ return {
   -- config = function()
   --   vim.cmd("colorscheme cyberdream")
   -- end
-  "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
-  opts = {},
-  config = function()
-    vim.cmd("colorscheme tokyonight-night")
-  end
+ --    "folke/tokyonight.nvim",
+ --    lazy = false,
+ --    priority = 1000,
+ --    opts = {},
+ --    config = function()
+	-- vim.cmd[[colorscheme tokyonight-night]]
+ --    end
 }

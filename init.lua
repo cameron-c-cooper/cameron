@@ -1,48 +1,23 @@
 vim.g.mapleader = ' '
-
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "number"
-
-vim.opt.shiftwidth = 2
-
+vim.opt.signcolumn = "yes"
+vim.opt.showmode = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.smartindent = true
+ -- vim.opt.wrap = false
 vim.g.have_nerd_font = true
-
 vim.opt.termguicolors = true
-
+vim.opt.incsearch = true
 vim.opt.clipboard = "unnamedplus"
-
 vim.opt.cursorline = true
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
-vim.filetype.add({
-  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
-})
-
+vim.opt.winborder = "rounded"
 
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.hl", "hypr*.conf"},
+  pattern = "*",
   callback = function(event)
-    print(string.format("starting hyprls for %s", vim.inspect(event)))
-    vim.lsp.start {
-      name = "hyprlang",
-      cmd = {"hyprls"},
-      root_dir = vim.fn.getcwd(),
-    }
-  end
-})
-
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  pattern = {"*.h"},
-  callback = function(event)
-    vim.bo.filetype = "c" 
+      vim.cmd [[ TSBufEnable highlight]]
   end
 })
 
@@ -69,3 +44,4 @@ require('lazy').setup({
   {import = 'plugins'},
 })
 
+vim.opt.guicursor = ""
