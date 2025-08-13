@@ -34,6 +34,8 @@ vim.pack.add({
 	{ src = "https://github.com/xixiaofinland/sf.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/numToStr/Comment.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
 	{ src = "https://github.com/hrsh7th/cmp-buffer" },
@@ -52,6 +54,21 @@ require("oil").setup({
 		show_hidden = true,
 	}
 })
+local harpoon = require('harpoon')
+
+harpoon:setup()
+
+vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end)
+vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set('n', '<C-h>', function() harpoon:list():select(1) end)
+vim.keymap.set('n', '<C-t>', function() harpoon:list():select(2) end)
+vim.keymap.set('n', '<C-n>', function() harpoon:list():select(3) end)
+vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
+
+-- Toggle previ'u' &'next buffers stored within Harpoon list
+vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end)
+vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end)
 
 require('sf').setup({
   enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
@@ -163,6 +180,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(event)
 	end
 })
-vim.keymap.set({ "i" }, "<C-e>", function() ls.expand() end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
+vim.keymap.set({ "i" }, "<C-e>", function() luasnip.expand() end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-K>", function() luasnip.jump(-1) end, { silent = true })
