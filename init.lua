@@ -38,7 +38,6 @@ vim.pack.add({
 	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
-	{ src = "https://github.com/hrsh7th/cmp-buffer" },
 	{ src = "https://github.com/hrsh7th/cmp-path" },
 	{ src = "https://github.com/hrsh7th/cmp-cmdline" },
 	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
@@ -71,8 +70,9 @@ vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end)
 vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end)
 
 require('sf').setup({
-  enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
+	enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
 })
+
 local sf = require('sf')
 vim.keymap.set("n", "<leader>sftf", sf.run_all_tests_in_this_file, { desc = "[S]ales [F]orce [T]est [F]ile" })
 vim.keymap.set("n", "<leader>sftm", sf.run_current_test, { desc = "[S]ales [F]orce [T]est [M]ethod" })
@@ -168,7 +168,7 @@ require("mason-lspconfig").setup({
 					local opts = { buffer = bufnr, silent = true }
 					vim.keymap.set({ "n" }, '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' } )
 					vim.keymap.set({ "n" }, 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' } )
-					vim.keymap.set({ "n" }, 'gf', vim.lsp.buf.definition, { desc = 'Goto Definition' } )
+					vim.keymap.set({ "n" }, 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' } )
 				end
 			})
 		end,
