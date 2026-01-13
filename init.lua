@@ -31,8 +31,6 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/unblevable/quick-scope" },
 	{ src = "https://github.com/xixiaofinland/sf.nvim" },
@@ -48,8 +46,6 @@ vim.pack.add({
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 })
 
-
-require("mason").setup()
 require("mini.pick").setup()
 require("oil").setup({
 	view_options = {
@@ -159,29 +155,24 @@ cmp.setup({
 	}),
 })
 local lspconfig = require("lspconfig")
-require("mason-lspconfig").setup({
-	ensure_installed = { "clangd" },
-	automatic_installation = true,
-	handlers = {
-		function(server)
-			lspconfig[server].setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				on_attach = function(_, bufnr)
-					local opts = { buffer = bufnr, silent = true }
-					vim.keymap.set({ "n" }, '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' } )
-					vim.keymap.set({ "n" }, 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' } )
-					vim.keymap.set({ "n" }, 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' } )
-				end
-			})
-		end,
-	},
-})
-
-vim.api.nvim_create_autocmd('LspAttach', {
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local attach_callback = function(args)
+	vim.keymap.set({ "n" }, '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' } )
+	vim.keymap.set({ "n" }, 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' } )
+	vim.keymap.set({ "n" }, 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' } )
+end
+vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup('lsp-attach', {clear = true}),
-	callback = function(event)
-	end
+	callback = attach_callback
 })
+vim.lsp.config["clangd"] = {
+	cmd = { "clangd" },
+	filetype = { 'c', 'cpp', 'h', 'hpp', 'cxx' },
+	root_markers = { '.git', 'compile_commands.json' },
+	capabilities = capabilities,
+}
+vim.lsp.enable('clangd')
+
 vim.keymap.set({ "i" }, "<C-e>", function() luasnip.expand() end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(1) end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-K>", function() luasnip.jump(-1) end, { silent = true })
