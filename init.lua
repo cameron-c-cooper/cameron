@@ -1,10 +1,12 @@
 vim.g.mapleader = ' '
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
-vim.opt.showmode = true
+
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+vim.opt.showmode = false
 vim.opt.smartindent = true
  -- vim.opt.wrap = false
 vim.g.have_nerd_font = true
@@ -13,6 +15,9 @@ vim.opt.incsearch = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.winborder = "rounded"
+
+vim.opt.smoothscroll = true
+vim.opt.scrolloff = 5
 
 vim.keymap.set({'n', 'v', 'x'}, '<leader>y', '"+y')
 vim.keymap.set({'n', 'v', 'x'}, '<leader>d', '"+d')
@@ -28,7 +33,6 @@ vim.pack.add({
 	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/nvzone/showkeys" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/unblevable/quick-scope" },
 	{ src = "https://github.com/xixiaofinland/sf.nvim" },
@@ -46,7 +50,6 @@ vim.pack.add({
 
 
 require("mason").setup()
-require("showkeys").setup({ position = "top-right" })
 require("mini.pick").setup()
 require("oil").setup({
 	view_options = {
@@ -69,24 +72,24 @@ vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
 vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end)
 vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end)
 
-require('sf').setup({
-	enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
-})
-
-local sf = require('sf')
-vim.keymap.set("n", "<leader>sftf", sf.run_all_tests_in_this_file, { desc = "[S]ales [F]orce [T]est [F]ile" })
-vim.keymap.set("n", "<leader>sftm", sf.run_current_test, { desc = "[S]ales [F]orce [T]est [M]ethod" })
-vim.keymap.set("n", "<leader>sftr", sf.repeat_last_tests, { desc = "[S]ales [F]orce [T]est [R]epeat" })
-vim.keymap.set("n", "<leader>sfto", sf.open_test_select, { desc = "[S]ales [F]orce [T]est [O]pen" })
-vim.keymap.set("n", "<leader>sftc", sf.covered_percent, { desc = "[S]ales [F]orce [T]est [C]overage" })
-vim.keymap.set("n", "<leader>sftt", sf.toggle_term, { desc = "[S]ales [F]orce [T]erminal [T]oggle" })
-vim.keymap.set("n", "<leader>sfoo", sf.set_target_org, { desc = "[S]ales [F]orce [O]rganization [O]pen" })
-vim.keymap.set("n", "<leader>sfol", sf.fetch_org_list, { desc = "[S]ales [F]orce [O]rganization [L]ist" })
-vim.keymap.set("n", "<leader>sfst", sf.toggle_sign, { desc = "[S]ales [F]orce [S]ign [T]oggle" })
-vim.keymap.set("n", "<leader>sfr", sf.retrieve, { desc = "[S]ales [F]orce [R]etrieve" })
-vim.keymap.set("n", "<leader>sfsp", sf.save_and_push, { desc = "[S]ales [F]orce [S]ave & [P]ush" })
-vim.keymap.set("v", "<leader>sfsq", sf.run_highlighted_soql, { desc = "[S]ales [F]orce [SQ]L" })
-vim.keymap.set("v", "<leader>sfcc", sf.create_apex_class, { desc = "[S]ales [F]orce [C]reate [C]lass" })
+-- require('sf').setup({
+-- 	enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
+-- })
+--
+-- local sf = require('sf')
+-- vim.keymap.set("n", "<leader>sftf", sf.run_all_tests_in_this_file, { desc = "[S]ales [F]orce [T]est [F]ile" })
+-- vim.keymap.set("n", "<leader>sftm", sf.run_current_test, { desc = "[S]ales [F]orce [T]est [M]ethod" })
+-- vim.keymap.set("n", "<leader>sftr", sf.repeat_last_tests, { desc = "[S]ales [F]orce [T]est [R]epeat" })
+-- vim.keymap.set("n", "<leader>sfto", sf.open_test_select, { desc = "[S]ales [F]orce [T]est [O]pen" })
+-- vim.keymap.set("n", "<leader>sftc", sf.covered_percent, { desc = "[S]ales [F]orce [T]est [C]overage" })
+-- vim.keymap.set("n", "<leader>sftt", sf.toggle_term, { desc = "[S]ales [F]orce [T]erminal [T]oggle" })
+-- vim.keymap.set("n", "<leader>sfoo", sf.set_target_org, { desc = "[S]ales [F]orce [O]rganization [O]pen" })
+-- vim.keymap.set("n", "<leader>sfol", sf.fetch_org_list, { desc = "[S]ales [F]orce [O]rganization [L]ist" })
+-- vim.keymap.set("n", "<leader>sfst", sf.toggle_sign, { desc = "[S]ales [F]orce [S]ign [T]oggle" })
+-- vim.keymap.set("n", "<leader>sfr", sf.retrieve, { desc = "[S]ales [F]orce [R]etrieve" })
+-- vim.keymap.set("n", "<leader>sfsp", sf.save_and_push, { desc = "[S]ales [F]orce [S]ave & [P]ush" })
+-- vim.keymap.set("v", "<leader>sfsq", sf.run_highlighted_soql, { desc = "[S]ales [F]orce [SQ]L" })
+-- vim.keymap.set("v", "<leader>sfcc", sf.create_apex_class, { desc = "[S]ales [F]orce [C]reate [C]lass" })
 
 vim.keymap.set('n', '-', '<CMD>Oil<CR>')
 vim.keymap.set('n', '-', '<CMD>Oil<CR>')
@@ -109,7 +112,6 @@ require('nvim-treesitter.configs').setup({
 	}
 })
 
-vim.cmd("ShowkeysToggle")
 vim.cmd("colorscheme carbonfox")
 
 vim.cmd(":hi statusline guibg=NONE")
