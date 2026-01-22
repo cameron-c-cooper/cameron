@@ -18,7 +18,6 @@ vim.opt.winborder = "rounded"
 
 vim.opt.smoothscroll = true
 vim.opt.scrolloff = 5
-
 vim.keymap.set({'n', 'v', 'x'}, '<leader>y', '"+y')
 vim.keymap.set({'n', 'v', 'x'}, '<leader>d', '"+d')
 
@@ -28,12 +27,12 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.pack.add({
 	{ src = "https://github.com/EdenEast/nightfox.nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/echasnovski/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.nvim", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" },
-	{ src = "https://github.com/chomosuke/typst-preview.nvim" },
+	-- { src = "https://github.com/chomosuke/typst-preview.nvim" },
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/unblevable/quick-scope" },
-	{ src = "https://github.com/xixiaofinland/sf.nvim" },
+	-- { src = "https://github.com/xixiaofinland/sf.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/numToStr/Comment.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -46,7 +45,24 @@ vim.pack.add({
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 })
 
-require("mini.pick").setup()
+require("mini.pairs").setup()
+require("mini.pick").setup({
+	delay = {
+		busy = 50,
+		idle = 10,
+	},
+
+	window = {
+		config = function()
+			return {
+				border = 'rounded',
+			}
+		end,
+	},
+})
+require("mini.git").setup()
+require("mini.extra").setup()
+require("mini.bufremove").setup()
 require("oil").setup({
 	view_options = {
 		show_hidden = true,
@@ -67,6 +83,36 @@ vim.keymap.set('n', '<C-s>', function() harpoon:list():select(4) end)
 -- Toggle previ'u' &'next buffers stored within Harpoon list
 vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end)
 vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end)
+
+vim.keymap.set('n', '<leader>fb', function()
+	MiniPick.builtin.buffers({
+		include_current = true,
+		sort_lastused = true,
+	})
+end, { desc = 'Pick buffer' })
+vim.keymap.set('n', '<leader>ff', function()
+	MiniPick.builtin.files({
+		tool = 'rg',
+	})
+end, { desc = 'Pick file' })
+vim.keymap.set('n', '<leader>fg', function()
+	MiniPick.builtin.grep_live()
+end, { desc = 'Grep' })
+vim.keymap.set('n', '<leader>fG', function()
+	MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>') })
+end, { desc = 'Grep word' })
+vim.keymap.set('n', '<leader>gf', function()
+	MiniExtra.pickers.git_files()
+end, { desc = 'Git files' })
+vim.keymap.set('n', '<leader>gs', function()
+	MiniExtra.pickers.git_status()
+end, { desc = 'Git status' })
+vim.keymap.set('n', '<leader>gc', function()
+	MiniExtra.pickers.git_commits()
+end, { desc = 'Git commits' })
+vim.keymap.set('n', '<leader>gb', function()
+	MiniExtra.pickers.git_branches()
+end, { desc = 'Git branches' })
 
 -- require('sf').setup({
 -- 	enable_hotkeys = false, -- false bc of potential conflicts with custom bindings
@@ -176,3 +222,4 @@ vim.lsp.enable('clangd')
 vim.keymap.set({ "i" }, "<C-e>", function() luasnip.expand() end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(1) end, { silent = true })
 vim.keymap.set({ "i", "s" }, "<C-K>", function() luasnip.jump(-1) end, { silent = true })
+
